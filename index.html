@@ -1327,8 +1327,8 @@ const SHOP_CATALOG=[
   {id:'doublexp',emoji:'⭐',name:'XP×2 لمرحلتين', desc:'يضاعف XP للمرحلتين القادمتين',   price:120, qty:2, type:'doublexp',    modes:'all'},
   // وضع فردي فقط
   {id:'heart2',  emoji:'❤️',name:'قلبان إضافيان', desc:'يعيد 2 قلب فوراً (فردي فقط)',       price:100, qty:2, type:'heart',      modes:'solo'},
-  {id:'bombshield',emoji:'🛡️',name:'درع القنبلة', desc:'يوقف القنبلة فوراً (فردي فقط)',     price:10,  qty:1, type:'bombshield', modes:'solo'},
-  {id:'bombdefuse',emoji:'🔧',name:'ذراع القنبلة', desc:'توقف القنبلة فوراً عند تفعيلها',   price:10,  qty:1, type:'bombdefuse', modes:'solo'},
+  {id:'bombshield',emoji:'🛡️',name:'درع القنبلة', desc:'يوقف القنبلة فوراً (فردي فقط)',     price:30,  qty:1, type:'bombshield', modes:'solo'},
+  {id:'bombdefuse',emoji:'🔧',name:'ذراع القنبلة', desc:'توقف القنبلة فوراً عند تفعيلها',   price:20,  qty:1, type:'bombdefuse', modes:'solo'},
   // روبوت فقط
   {id:'frzrobot',emoji:'🥶',name:'2 تجميد روبوت', desc:'جمّد الروبوت 10 ثوانٍ (روبوت فقط)', price:50,  qty:2, type:'freezerobot',modes:'robot'},
   // ثيمات
@@ -2079,14 +2079,13 @@ function bombExplode(){
 // ══════════════════════════════════════════════
 // ── صندوق الغموض: جوائز نادرة صعبة الجمع ──
 const MYSTERY_PRIZES=[
+  {emoji:'🪙', text:'+15 عملة',           action:()=>addCoins(15)},
   {emoji:'🪙', text:'+20 عملة',           action:()=>addCoins(20)},
   {emoji:'💡', text:'تلميح + كشف',        action:()=>{ ownedHints+=1; ownedReveals+=1; updateInventoryUI(); }},
+  {emoji:'🪙', text:'+10 عملة',           action:()=>addCoins(10)},
   {emoji:'❄️', text:'تجميدان للوقت',      action:()=>{ ownedFreezes+=2; updateInventoryUI(); }},
   {emoji:'👁️', text:'كشف + تجميد روبوت', action:()=>{ ownedReveals+=1; ownedFreezeRobots+=1; updateInventoryUI(); }},
-  {emoji:'⭐', text:'XP×2 لمرحلتين',      action:()=>{ doubleXpCharges+=2; }},
-  {emoji:'❤️', text:'قلب واحد مجاني',    action:()=>gainHeart(1)},
-  {emoji:'💎', text:'+80 خبرة',           action:()=>addXp(80)},
-  {emoji:'🎁', text:'مضاعفة المكافآت',   action:()=>{ doubleRewards=true; }},
+  
 ];
 let _mysteryPrize=null;
 let _mysteryCallback=null;
@@ -2521,7 +2520,7 @@ function doFound(p){
   if(combo>stats.highestCombo) stats.highestCombo=combo;
   updateComboUI();
   
-  let earn=20;     // 20 عملات لكل كلمة
+  let earn=15;     // 20 عملات لكل كلمة
   let xpEarn=10;   // 10 XP لكل كلمة (بدل 15)
   
   if(combo>=3){
@@ -2533,7 +2532,7 @@ function doFound(p){
 
   if(p.golden){
     goldenFound=true;
-    earn+=30;   // كلمة ذهبية +30 عملة إضافية (سرية)
+    earn+=25;   // كلمة ذهبية +30 عملة إضافية (سرية)
     xpEarn+=10;
     AudioSys.playFound(); // نفس صوت الكلمة العادية
     triggerAch('golden'); // الإنجاز يُفتح بصمت
